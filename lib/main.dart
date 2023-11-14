@@ -14,26 +14,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => PaletteState(),
-        builder: (context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Theme App',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor:
-                    context.watch<DockState>().selectedPalette.primaryColor,
-                primary:
-                    context.watch<DockState>().selectedPalette.primaryColor,
-                secondary: context
-                    .watch<DockState>()
-                    .selectedPalette
-                    .secondaryColor,
+      create: (context) => DockState(),
+      builder: (context, child) => ChangeNotifierProvider(
+          create: (context) => PaletteState(),
+          builder: (context, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Theme App',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: context.watch<DockState>().selectedPalette.primaryColor,
+                  primary: context.watch<DockState>().selectedPalette.primaryColor,
+                  secondary: context.watch<DockState>().selectedPalette.secondaryColor,
+                ),
+                useMaterial3: true,
               ),
-              useMaterial3: true,
-            ),
-            home: const HomePage(),
-          );
-        });
+              home: const HomePage(),
+            );
+          }),
+    );
   }
 }
