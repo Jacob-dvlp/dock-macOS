@@ -22,22 +22,16 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Theme App',
               theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor:
-                    context.watch<DockState>().selectedPalette.primaryColor,
-                primary:
-                    context.watch<DockState>().selectedPalette.primaryColor,
-                secondary: context
-                    .watch<DockState>()
-                    .selectedPalette
-                    .secondaryColor,
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: context.watch<DockState>().selectedPalette.primaryColor,
+                  primary: context.watch<DockState>().selectedPalette.primaryColor,
+                  secondary: context.watch<DockState>().selectedPalette.secondaryColor,
+                ),
+                useMaterial3: true,
               ),
-              useMaterial3: true,
-            ),
               home: const HomePage(),
             );
           }),
     );
-  
   }
 }
