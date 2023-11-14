@@ -14,12 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => PaletteState(),
-        builder: (context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Theme App',
-            theme: ThemeData(
+      create: (context) => DockState(),
+      builder: (context, child) => ChangeNotifierProvider(
+          create: (context) => PaletteState(),
+          builder: (context, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Theme App',
+              theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
                 seedColor:
                     context.watch<DockState>().selectedPalette.primaryColor,
@@ -32,8 +34,10 @@ class MyApp extends StatelessWidget {
               ),
               useMaterial3: true,
             ),
-            home: const HomePage(),
-          );
-        });
+              home: const HomePage(),
+            );
+          }),
+    );
+  
   }
 }
